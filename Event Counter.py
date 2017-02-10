@@ -5,7 +5,7 @@ sport=set()
 with open('Summer Olympic medallists 1896 to 2008.csv',newline='') as rawdata:
     with open('eventType.csv', 'w', newline='') as db:
         datareader=csv.DictReader(rawdata)
-        database=csv.writer(db, delimiter=',')
+        database=csv.writer(db, delimiter='|') # Usinf '|' as delimiter to avoid misinterpretation of ',' in events' names
         counter=0
         for row in datareader:
             events.add(row['Event'])
