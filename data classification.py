@@ -20,6 +20,8 @@ with open("eventType.csv") as events:
                 temp=medaldict.copy()
                 for i in range(1896,2012,4):
                     for row_d in data:
+                        if row_d['Discipline'] != event: # Check if it is the right competition
+                            continue
                         if eval(row_d['Edition'])<i: # Loop until we get the year(Naive solution, eval for tranform str into int)
                             continue
                         elif eval(row_d['Edition'])>i: # Avoid over looping
@@ -27,6 +29,7 @@ with open("eventType.csv") as events:
                         temp[row_d['NOC']][medal.index(row_d['Medal'])]+=1 # Gain 1 for medal!
                     temp.update({'Edition':i})
                     database.writerow(temp)
+                    print(temp)
                     temp.clear()
                     temp.update([(country,[0,0,0]) for country in countrylist])
 
